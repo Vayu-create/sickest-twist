@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Sickest Twist',
+  description: 'Turn ordinary dishes into extraordinary chaos. Upload your most deliciously unhinged food twists and WIN BIG',
   generator: 'v0.dev',
 }
 
