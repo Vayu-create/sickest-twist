@@ -19,26 +19,26 @@ export default function LandingPage() {
 
   const foodCombos = [
     {
-      title: "Dosa + Gunpowder Overload",
-      description: "Traditional meets explosive flavor",
+      title: "Dosa + Avacado Butter",
+      description: "India meets Mexico?",
       image: "/placeholder.svg?height=300&width=400",
       votes: "2.3K",
     },
     {
       title: "Maggi + Black Olives",
-      description: "Italian chaos in Indian comfort",
+      description: "We won't judge, but it's a bit weird",
       image: "/placeholder.svg?height=300&width=400",
       votes: "1.8K",
     },
     {
-      title: "MSG Fairy Dust Everything",
-      description: "Uncle Roger approved madness",
+      title: "Gajar Ka Halwa + Brie Cheese",
+      description: "I hate the idea, but my tastebuds are intrigued",
       image: "/placeholder.svg?height=300&width=400",
       votes: "3.1K",
     },
     {
       title: "Pizza + Pickle Juice",
-      description: "Controversial but addictive",
+      description: "Italians hate you for this",
       image: "/placeholder.svg?height=300&width=400",
       votes: "892",
     },
@@ -49,12 +49,12 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div
-          className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-green-900/20"
+          className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-black to-green-900/40"
           style={{
             transform: `translateY(${scrollY * 0.5}px)`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
 
         <div
           className={`relative z-10 text-center max-w-4xl transition-all duration-1000 ${
@@ -69,7 +69,7 @@ export default function LandingPage() {
 
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
             Turn ordinary dishes into <span className="text-green-400 font-bold">extraordinary chaos</span>. Upload your
-            most deliciously unhinged food combinations.
+            most deliciously unhinged food twists and WIN BIG
           </p>
 
           <Button
@@ -80,20 +80,25 @@ export default function LandingPage() {
             Submit Your Sick Twist Now
           </Button>
         </div>
+
+        {/* Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0 z-20">
+          <div className="h-24 bg-gradient-to-b from-black to-purple-950/20" />
+        </div>
       </section>
 
       {/* Hero Food Gallery Section */}
-      <section className="relative py-20 px-4 bg-black">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black pointer-events-none" />
+      <section className="relative py-20 px-4 bg-gradient-to-br from-purple-950/20 via-black to-black">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]" />
         
-        <div className="relative z-10 max-w-7xl mx-auto">
+        <div className="relative z-10 max-w-7xl mx-auto pt-12">
           <div className="relative z-10 mb-16 max-w-3xl mx-auto">
             <h2 className="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
               SICKEST COMBOS
             </h2>
             <p className="text-center text-gray-100 text-xl leading-relaxed">
-              These twisted creations broke the internet, offended traditions, and created{" "}
-              <span className="text-pink-400 font-bold">pure magic</span>
+              These twisted creations broke the internet, offended traditions, but somehow...{" "}
+              <span className="text-pink-400 font-bold">actually worked</span>
             </p>
           </div>
 
@@ -228,8 +233,8 @@ export default function LandingPage() {
             </p>
 
             <p>
-              These "twists," sometimes genius, sometimes sacrilege, are what make food culture
-              <span className="text-pink-400 font-bold"> rich, chaotic, and deeply fun</span>.
+            Sometimes genius. Sometimes unhinged. These twists are what make food culture
+              <span className="text-pink-400 font-bold"> rich, chaotic, and ridiculously fun </span>.
             </p>
 
             <p className="text-2xl font-bold text-green-400">
@@ -270,7 +275,7 @@ export default function LandingPage() {
                 <Trophy className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-white">Win Big</h3>
-              <p className="text-gray-400">The sickest twist gets featured globally on POSHA machines worldwide.</p>
+              <p className="text-gray-400">The sickest twist WINS.</p>
             </div>
           </div>
         </div>
@@ -280,10 +285,10 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-green-900/30">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl md:text-6xl font-black mb-6 text-white">
-            READY TO GO
+            READY TO BREAK THE
             <br />
             <span className="bg-gradient-to-r from-green-400 to-pink-500 bg-clip-text text-transparent">
-              ABSOLUTELY VIRAL?
+              CULINARY RULES?
             </span>
           </h2>
 
@@ -304,7 +309,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-gray-800">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-500">© 2024 POSHA. Powered by culinary chaos and community creativity.</p>
+          <p className="text-gray-500">© 2024 POSHA. Powered by chaos, community, and creativity.</p>
         </div>
       </footer>
     </div>
