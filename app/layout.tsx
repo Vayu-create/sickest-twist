@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { cn } from '@/lib/utils'
-import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'v0 App',
@@ -16,18 +15,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* Google Analytics */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-5BJV7YPMN4" />
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-5BJV7YPMN4');
-          `}
-        </Script>
-      </head>
       <body className={cn('min-h-screen bg-background font-sans antialiased')} suppressHydrationWarning>
         {children}
       </body>

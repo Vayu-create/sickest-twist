@@ -135,13 +135,13 @@ export default function LandingPage() {
         
         <div className="relative z-10 max-w-7xl mx-auto pt-12">
           <div className="relative z-10 mb-16 max-w-3xl mx-auto">
-            <h2 className="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-              SICKEST COMBOS
-            </h2>
+          <h2 className="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+            SICKEST COMBOS
+          </h2>
             <p className="text-center text-gray-100 text-xl leading-relaxed">
               These twisted creations broke the internet, offended traditions, but somehow...{" "}
               <span className="text-pink-400 font-bold">actually worked</span>
-            </p>
+          </p>
           </div>
 
           {/* Reels Carousel */}
@@ -152,44 +152,44 @@ export default function LandingPage() {
                   <div key={index} className="flex-[0_0_300px] min-w-0">
                     <Card className="bg-gradient-to-br from-gray-900/80 to-black/80 border-0 overflow-hidden group cursor-pointer relative h-[533px]">
                       <div className="relative h-full overflow-hidden">
-                        <img
+                  <img
                           src={combo.video}
-                          alt={combo.title}
+                    alt={combo.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
-                        {/* Floating Vote Badge */}
-                        <div className="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-300">
-                          <Badge className="bg-gradient-to-r from-green-400 to-green-600 text-black font-black px-3 py-1 text-sm">
-                            <Users className="h-3 w-3 mr-1" />
-                            {combo.votes} votes
-                          </Badge>
-                        </div>
+                  {/* Floating Vote Badge */}
+                  <div className="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-300">
+                    <Badge className="bg-gradient-to-r from-green-400 to-green-600 text-black font-black px-3 py-1 text-sm">
+                      <Users className="h-3 w-3 mr-1" />
+                      {combo.votes} votes
+                    </Badge>
+                  </div>
 
-                        {/* Play Button with Glow Effect */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <Button
-                            size="lg"
+                  {/* Play Button with Glow Effect */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Button
+                      size="lg"
                             className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/30 hover:border-white/60 rounded-full w-16 h-16 group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-pink-500/30"
-                          >
+                    >
                             <Play className="h-6 w-6 ml-1" fill="currentColor" />
-                          </Button>
-                        </div>
+                    </Button>
+                  </div>
 
                         {/* Title and Description Overlay */}
                         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
                           <h3 className="font-black text-2xl mb-2 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
-                            {combo.title}
-                          </h3>
+                    {combo.title}
+                  </h3>
                           <p className="text-gray-400 text-lg">{combo.description}</p>
-                        </div>
-                      </div>
-                    </Card>
+                  </div>
+                </div>
+              </Card>
                   </div>
                 ))}
-              </div>
-            </div>
+                  </div>
+                </div>
 
             {/* Navigation Arrows */}
             <Button
@@ -236,7 +236,7 @@ export default function LandingPage() {
             <p>
               We all have those quirky preferences that turn an ordinary dish into <em>our dish</em>.
             Sometimes genius. Sometimes unhinged. These twists are what make food culture
-              <span className="text-pink-400 font-bold"> rich, chaotic, and ridiculously fun </span>.
+              <span className="text-pink-400 font-bold"> rich, chaotic, and ridiculously fun</span>
             </p>
 
             <p className="text-2xl font-bold text-green-400">
