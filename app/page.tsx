@@ -45,15 +45,16 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4">
+      <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div
           className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-green-900/20"
           style={{
             transform: `translateY(${scrollY * 0.5}px)`,
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
 
         <div
           className={`relative z-10 text-center max-w-4xl transition-all duration-1000 ${
@@ -82,15 +83,19 @@ export default function LandingPage() {
       </section>
 
       {/* Hero Food Gallery Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-            SICKEST COMBOS
-          </h2>
-          <p className="text-center text-gray-300 mb-16 text-xl max-w-3xl mx-auto">
-            These twisted creations broke the internet, offended traditions, and created{" "}
-            <span className="text-pink-400 font-bold">pure magic</span>
-          </p>
+      <section className="relative py-20 px-4 bg-black">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black pointer-events-none" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="relative z-10 mb-16 max-w-3xl mx-auto">
+            <h2 className="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+              SICKEST COMBOS
+            </h2>
+            <p className="text-center text-gray-100 text-xl leading-relaxed">
+              These twisted creations broke the internet, offended traditions, and created{" "}
+              <span className="text-pink-400 font-bold">pure magic</span>
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             {foodCombos.slice(0, 2).map((combo, index) => (
