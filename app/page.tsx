@@ -116,6 +116,7 @@ export default function LandingPage() {
 
           <Button
             size="lg"
+            id="cta-submit"
             className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-pink-500/25"
           >
             <Upload className="mr-2 h-5 w-5" />
@@ -298,6 +299,7 @@ export default function LandingPage() {
 
           <Button
             size="lg"
+            id="cta-submit"
             className="bg-gradient-to-r from-green-500 to-pink-600 hover:from-green-600 hover:to-pink-700 text-white font-black px-12 py-6 text-xl rounded-full transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-green-500/25"
           >
             <Upload className="mr-3 h-6 w-6" />
