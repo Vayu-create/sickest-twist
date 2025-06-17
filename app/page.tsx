@@ -1,46 +1,88 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Play, Upload, Users, Trophy } from "lucide-react"
+import { Play, Upload, Users, Trophy, ChevronLeft, ChevronRight } from "lucide-react"
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
 
 export default function LandingPage() {
   const [scrollY, setScrollY] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true, 
+    align: "start",
+    skipSnaps: false,
+    dragFree: false
+  }, [Autoplay()])
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener("scroll", handleScroll)
+    let ticking = false
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(Math.max(0, window.scrollY * 0.5))
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
     setIsVisible(true)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Add scroll functions
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) {
+      emblaApi.scrollPrev()
+    }
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) {
+      emblaApi.scrollNext()
+    }
+  }, [emblaApi])
 
   const foodCombos = [
     {
       title: "Dosa + Avacado Butter",
       description: "India meets Mexico?",
-      image: "/placeholder.svg?height=300&width=400",
+      video: "/placeholder.svg?height=640&width=360",
       votes: "2.3K",
     },
     {
       title: "Maggi + Black Olives",
       description: "We won't judge, but it's a bit weird",
-      image: "/placeholder.svg?height=300&width=400",
+      video: "/placeholder.svg?height=640&width=360",
       votes: "1.8K",
     },
     {
       title: "Gajar Ka Halwa + Brie Cheese",
       description: "I hate the idea, but my tastebuds are intrigued",
-      image: "/placeholder.svg?height=300&width=400",
+      video: "/placeholder.svg?height=640&width=360",
       votes: "3.1K",
     },
     {
       title: "Pizza + Pickle Juice",
       description: "Italians hate you for this",
-      image: "/placeholder.svg?height=300&width=400",
+      video: "/placeholder.svg?height=640&width=360",
       votes: "892",
+    },
+    {
+      title: "Gulab Jamun Cheesecake",
+      description: "Can't go wrong with this",
+      video: "/placeholder.svg?height=640&width=360",
+      votes: "4.2K",
+    },
+    {
+      title: "Masala Chai Boba",
+      description: "I will try anything once",
+      video: "/placeholder.svg?height=640&width=360",
+      votes: "1.5K",
     },
   ]
 
@@ -49,9 +91,9 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div
-          className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-black to-green-900/40"
+          className="absolute inset-0 -top-[100px] bg-gradient-to-br from-purple-900/40 via-black to-black will-change-transform"
           style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
+            transform: `translate3d(0, ${scrollY}px, 0)`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
@@ -77,7 +119,7 @@ export default function LandingPage() {
             className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-pink-500/25"
           >
             <Upload className="mr-2 h-5 w-5" />
-            Submit Your Sick Twist Now
+            Submit Your Sickest Twist Now
           </Button>
         </div>
 
@@ -88,7 +130,7 @@ export default function LandingPage() {
       </section>
 
       {/* Hero Food Gallery Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-br from-purple-950/20 via-black to-black">
+      <section className="relative py-20 px-4 bg-gradient-to-br from-purple-950/20 via-black to-black overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]" />
         
         <div className="relative z-10 max-w-7xl mx-auto pt-12">
@@ -102,109 +144,73 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {foodCombos.slice(0, 2).map((combo, index) => (
-              <Card
-                key={index}
-                className="bg-gradient-to-br from-gray-900/80 to-black/80 border-0 overflow-hidden group cursor-pointer relative"
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <img
-                    src={combo.image || "/placeholder.svg"}
-                    alt={combo.title}
-                    className="w-full h-full object-cover group-hover:scale-125 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+          {/* Reels Carousel */}
+          <div className="relative max-w-[95%] mx-auto">
+            <div className="overflow-hidden" ref={emblaRef}>
+              <div className="flex gap-4 pl-4">
+                {foodCombos.map((combo, index) => (
+                  <div key={index} className="flex-[0_0_300px] min-w-0">
+                    <Card className="bg-gradient-to-br from-gray-900/80 to-black/80 border-0 overflow-hidden group cursor-pointer relative h-[533px]">
+                      <div className="relative h-full overflow-hidden">
+                        <img
+                          src={combo.video}
+                          alt={combo.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
-                  {/* Floating Vote Badge */}
-                  <div className="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-300">
-                    <Badge className="bg-gradient-to-r from-green-400 to-green-600 text-black font-black px-3 py-1 text-sm">
-                      <Users className="h-3 w-3 mr-1" />
-                      {combo.votes} votes
-                    </Badge>
+                        {/* Floating Vote Badge */}
+                        <div className="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-300">
+                          <Badge className="bg-gradient-to-r from-green-400 to-green-600 text-black font-black px-3 py-1 text-sm">
+                            <Users className="h-3 w-3 mr-1" />
+                            {combo.votes} votes
+                          </Badge>
+                        </div>
+
+                        {/* Play Button with Glow Effect */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Button
+                            size="lg"
+                            className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/30 hover:border-white/60 rounded-full w-16 h-16 group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-pink-500/30"
+                          >
+                            <Play className="h-6 w-6 ml-1" fill="currentColor" />
+                          </Button>
+                        </div>
+
+                        {/* Title and Description Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+                          <h3 className="font-black text-2xl mb-2 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
+                            {combo.title}
+                          </h3>
+                          <p className="text-gray-400 text-lg">{combo.description}</p>
+                        </div>
+                      </div>
+                    </Card>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  {/* Play Button with Glow Effect */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Button
-                      size="lg"
-                      className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/30 hover:border-white/60 rounded-full w-20 h-20 group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-pink-500/30"
-                    >
-                      <Play className="h-8 w-8 ml-1" fill="currentColor" />
-                    </Button>
-                  </div>
+            {/* Navigation Arrows */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 z-10"
+              onClick={scrollPrev}
+            >
+              <ChevronLeft className="h-6 w-6" />
+              <span className="sr-only">Previous slide</span>
+            </Button>
 
-                  {/* Trending Indicator */}
-                  <div className="absolute bottom-4 left-4">
-                    <Badge className="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold px-2 py-1 text-xs animate-pulse">
-                      🔥 TRENDING
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="p-6 relative">
-                  <h3 className="font-black text-2xl mb-3 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
-                    {combo.title}
-                  </h3>
-                  <p className="text-gray-400 text-lg leading-relaxed">{combo.description}</p>
-
-                  {/* Interactive Bottom Bar */}
-                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-700/50">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-green-400 text-sm font-semibold">LIVE REACTIONS</span>
-                    </div>
-                    <Button
-                      size="sm"
-                      className="bg-gradient-to-r from-pink-500/20 to-purple-600/20 hover:from-pink-500/40 hover:to-purple-600/40 text-pink-400 border border-pink-500/30 hover:border-pink-400 transition-all duration-300"
-                    >
-                      Try This →
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {foodCombos.slice(2).map((combo, index) => (
-              <Card
-                key={index + 2}
-                className="bg-gradient-to-br from-gray-900/60 to-black/60 border border-gray-800/50 overflow-hidden group cursor-pointer hover:border-pink-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={combo.image || "/placeholder.svg"}
-                    alt={combo.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-                  <div className="absolute top-3 right-3">
-                    <Badge className="bg-green-500/90 text-black font-bold text-xs">
-                      <Users className="h-3 w-3 mr-1" />
-                      {combo.votes}
-                    </Badge>
-                  </div>
-
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button
-                      size="sm"
-                      className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white border-0 rounded-full w-12 h-12"
-                    >
-                      <Play className="h-4 w-4 ml-0.5" fill="currentColor" />
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="p-4">
-                  <h3 className="font-bold text-lg mb-2 text-white group-hover:text-pink-400 transition-colors duration-300">
-                    {combo.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm">{combo.description}</p>
-                </div>
-              </Card>
-            ))}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 z-10"
+              onClick={scrollNext}
+            >
+              <ChevronRight className="h-6 w-6" />
+              <span className="sr-only">Next slide</span>
+            </Button>
           </div>
 
           {/* View More Button */}
@@ -228,17 +234,13 @@ export default function LandingPage() {
 
           <div className="text-lg md:text-xl text-gray-300 space-y-6 leading-relaxed">
             <p>
-              We all have those quirky preferences that turn an ordinary dish into <em>our dish</em>. Maybe it's
-              overloading your dosa with gunpowder podi. Maybe it's tossing black olives into your Maggi.
-            </p>
-
-            <p>
+              We all have those quirky preferences that turn an ordinary dish into <em>our dish</em>.
             Sometimes genius. Sometimes unhinged. These twists are what make food culture
               <span className="text-pink-400 font-bold"> rich, chaotic, and ridiculously fun </span>.
             </p>
 
             <p className="text-2xl font-bold text-green-400">
-              You don't get to truly great ideas without crossing a few lines first.
+              You don't get to truly great ideas without crossing a few bad ones
             </p>
           </div>
         </div>
@@ -299,7 +301,7 @@ export default function LandingPage() {
             className="bg-gradient-to-r from-green-500 to-pink-600 hover:from-green-600 hover:to-pink-700 text-white font-black px-12 py-6 text-xl rounded-full transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-green-500/25"
           >
             <Upload className="mr-3 h-6 w-6" />
-            Submit Your Sick Twist Now
+            Submit Your Sickest Twist Now
           </Button>
 
           <p className="text-sm text-gray-500 mt-6">Join thousands of food rebels breaking culinary rules worldwide</p>
