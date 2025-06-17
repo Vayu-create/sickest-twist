@@ -87,103 +87,95 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden" style={{ backgroundColor: 'rgba(35,35,35,255)' }}>
         <div
-          className="absolute inset-0 -top-[100px] bg-gradient-to-br from-purple-900/40 via-black to-black will-change-transform"
+          className="absolute inset-0 will-change-transform"
           style={{
-            transform: `translate3d(0, ${scrollY}px, 0)`,
+            backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
-
-        <div
-          className={`relative z-10 text-center max-w-4xl transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent leading-tight">
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h1 className="text-7xl md:text-9xl font-display font-black mb-8 text-white leading-[1.1] tracking-tight">
             THE SICKEST
             <br />
             TWIST
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Turn ordinary dishes into <span className="text-green-400 font-bold">extraordinary chaos</span>. Upload your
-            most deliciously unhinged food twists and WIN BIG
+          <p className="text-xl md:text-2xl text-white mb-12 max-w-2xl mx-auto leading-relaxed">
+            Turn ordinary dishes into extraordinary chaos. Upload your
+            most deliciously unhinged food twists and <span className="text-yellow-400 font-semibold">WIN BIG</span>
           </p>
 
           <Button
             size="lg"
             id="cta-submit"
-            className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold px-8 py-4 text-lg rounded-full transform hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-pink-500/25"
+            className="text-lg px-10 py-6 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            onClick={() => {
+              const ctaElement = document.getElementById("cta-submit");
+              if (ctaElement) {
+                ctaElement.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
           >
-            <Upload className="mr-2 h-5 w-5" />
-            Submit Your Sickest Twist Now
+            Submit Your Twist
           </Button>
-        </div>
-
-        {/* Section Divider */}
-        <div className="absolute bottom-0 left-0 right-0 z-20">
-          <div className="h-24 bg-gradient-to-b from-black to-purple-950/20" />
         </div>
       </section>
 
       {/* Hero Food Gallery Section */}
-      <section className="relative py-20 px-4 bg-gradient-to-br from-purple-950/20 via-black to-black overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]" />
-        
-        <div className="relative z-10 max-w-7xl mx-auto pt-12">
-          <div className="relative z-10 mb-16 max-w-3xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-green-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-            SICKEST COMBOS
-          </h2>
-            <p className="text-center text-gray-100 text-xl leading-relaxed">
-              These twisted creations broke the internet, offended traditions, but somehow...{" "}
-              <span className="text-pink-400 font-bold">actually worked</span>
-          </p>
+      <section className="relative py-32 px-4 bg-white">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="relative z-10 mb-20 max-w-3xl mx-auto">
+            <h2 className="text-5xl md:text-7xl font-display font-black text-center mb-8 text-gray-900">
+              SICKEST COMBOS
+            </h2>
+            <p className="text-center text-gray-600 text-xl leading-relaxed">
+              These twisted creations broke the internet, offended traditions, inspired hate threads,{" "}
+              <span className="text-yellow-500 font-semibold">but some of them changed food forever!</span>
+            </p>
           </div>
 
           {/* Reels Carousel */}
           <div className="relative max-w-[95%] mx-auto">
             <div className="overflow-hidden" ref={emblaRef}>
-              <div className="flex gap-4 pl-4">
+              <div className="flex gap-6 pl-4">
                 {foodCombos.map((combo, index) => (
-                  <div key={index} className="flex-[0_0_300px] min-w-0">
-                    <Card className="bg-gradient-to-br from-gray-900/80 to-black/80 border-0 overflow-hidden group cursor-pointer relative h-[533px]">
+                  <div key={index} className="flex-[0_0_320px] min-w-0">
+                    <Card className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 overflow-hidden group cursor-pointer relative h-[533px] card-hover">
                       <div className="relative h-full overflow-hidden">
                   <img
                           src={combo.video}
                     alt={combo.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/30 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
 
                   {/* Floating Vote Badge */}
                   <div className="absolute top-4 right-4 transform group-hover:scale-110 transition-transform duration-300">
-                    <Badge className="bg-gradient-to-r from-green-400 to-green-600 text-black font-black px-3 py-1 text-sm">
-                      <Users className="h-3 w-3 mr-1" />
+                          <Badge className="bg-black dark:bg-white text-white dark:text-black font-semibold px-4 py-1.5 text-sm shadow-lg">
+                            <Users className="h-3.5 w-3.5 mr-1.5" />
                       {combo.votes} votes
                     </Badge>
                   </div>
 
-                  {/* Play Button with Glow Effect */}
+                        {/* Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Button
                       size="lg"
-                            className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white border-2 border-white/30 hover:border-white/60 rounded-full w-16 h-16 group-hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-pink-500/30"
+                            className="bg-black hover:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-black border-2 border-white/20 hover:border-white/30 rounded-full w-20 h-20 group-hover:scale-110 transition-all duration-300 shadow-lg"
                     >
-                            <Play className="h-6 w-6 ml-1" fill="currentColor" />
+                            <Play className="h-7 w-7 ml-1" fill="currentColor" />
                     </Button>
                   </div>
 
                         {/* Title and Description Overlay */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
-                          <h3 className="font-black text-2xl mb-2 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-pink-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
+                        <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent">
+                          <h3 className="font-display font-bold text-2xl mb-3 text-white group-hover:text-amber-400 transition-all duration-300">
                     {combo.title}
                   </h3>
-                          <p className="text-gray-400 text-lg">{combo.description}</p>
+                          <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">{combo.description}</p>
                   </div>
                 </div>
               </Card>
@@ -196,7 +188,7 @@ export default function LandingPage() {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 z-10"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-black hover:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-black rounded-full w-12 h-12 z-10 shadow-lg hover-lift"
               onClick={scrollPrev}
             >
               <ChevronLeft className="h-6 w-6" />
@@ -206,7 +198,7 @@ export default function LandingPage() {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-10 h-10 z-10"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-black hover:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-black rounded-full w-12 h-12 z-10 shadow-lg hover-lift"
               onClick={scrollNext}
             >
               <ChevronRight className="h-6 w-6" />
@@ -215,10 +207,10 @@ export default function LandingPage() {
           </div>
 
           {/* View More Button */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/40 hover:to-pink-600/40 text-white border border-purple-500/50 hover:border-pink-400 font-bold px-8 py-3 rounded-full transition-all duration-300"
+              className="bg-black hover:bg-gray-900 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-black font-semibold px-10 py-4 text-lg rounded-full transition-all duration-300 hover-lift"
             >
               View All Sick Combos →
             </Button>
@@ -227,20 +219,20 @@ export default function LandingPage() {
       </section>
 
       {/* Concept Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-gray-900/50 to-black">
+      <section className="py-20 px-4" style={{ backgroundColor: 'rgba(35,35,35,255)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-black mb-8 text-white">
-            FOOD IS <span className="text-green-400">PERSONAL</span>
+          <h2 className="text-4xl md:text-5xl font-display font-black mb-8 text-white">
+            FOOD IS <span className="text-white">PERSONAL</span>
           </h2>
 
-          <div className="text-lg md:text-xl text-gray-300 space-y-6 leading-relaxed">
+          <div className="text-lg md:text-xl text-white space-y-6 leading-relaxed">
             <p>
               We all have those quirky preferences that turn an ordinary dish into <em>our dish</em>.
-            Sometimes genius. Sometimes unhinged. These twists are what make food culture
-              <span className="text-pink-400 font-bold"> rich, chaotic, and ridiculously fun</span>
+              Sometimes genius. Sometimes unhinged. These twists are what make food culture{" "}
+              <span className="text-yellow-400 font-semibold">rich, chaotic, and ridiculously fun.</span>
             </p>
 
-            <p className="text-2xl font-bold text-green-400">
+            <p className="text-2xl font-bold text-yellow-400">
               You don't get to truly great ideas without crossing a few bad ones
             </p>
           </div>
@@ -248,73 +240,74 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-black text-center mb-16 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-display font-black text-center mb-16 text-gray-900">
             HOW IT WORKS
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-pink-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Upload className="h-8 w-8 text-white" />
+              <div className="bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-orange-900/20 p-8 rounded-2xl mb-6 transform transition-all duration-300 group-hover:scale-105">
+                <Upload className="h-12 w-12 mx-auto mb-4 text-purple-600 dark:text-purple-400" />
+                <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400">Upload Your Twist</h3>
+                <p className="text-gray-600 dark:text-gray-300">Share your most creative (or controversial) food combinations with the world</p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Upload Your Twist</h3>
-              <p className="text-gray-400">
-                Take a classic dish and do something insane to it. Upload your recipe video.
-              </p>
             </div>
 
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-green-500 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Users className="h-8 w-8 text-white" />
+              <div className="bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-orange-900/20 p-8 rounded-2xl mb-6 transform transition-all duration-300 group-hover:scale-105">
+                <Users className="h-12 w-12 mx-auto mb-4 text-pink-600 dark:text-pink-400" />
+                <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400">Community Votes</h3>
+                <p className="text-gray-600 dark:text-gray-300">Let the community decide which twists are truly revolutionary</p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Community Votes</h3>
-              <p className="text-gray-400">POSHA users taste, vote, argue, and celebrate your creation.</p>
             </div>
 
             <div className="text-center group">
-              <div className="bg-gradient-to-br from-yellow-500 to-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Trophy className="h-8 w-8 text-white" />
+              <div className="bg-gradient-to-br from-purple-100 via-pink-100 to-orange-100 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-orange-900/20 p-8 rounded-2xl mb-6 transform transition-all duration-300 group-hover:scale-105">
+                <Trophy className="h-12 w-12 mx-auto mb-4 text-orange-600 dark:text-orange-400" />
+                <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-400">Win Big</h3>
+                <p className="text-gray-600 dark:text-gray-300">Top creators get featured, win prizes, and become food trendsetters</p>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-white">Win Big</h3>
-              <p className="text-gray-400">The sickest twist WINS.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-4 bg-gradient-to-r from-purple-900/30 via-pink-900/30 to-green-900/30">
+      <section className="py-32 px-4" style={{ backgroundColor: 'rgba(35,35,35,255)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-black mb-6 text-white">
+          <h2 className="text-5xl md:text-7xl font-display font-black mb-8 text-white">
             READY TO BREAK THE
             <br />
-            <span className="bg-gradient-to-r from-green-400 to-pink-500 bg-clip-text text-transparent">
-              CULINARY RULES?
-            </span>
+            CULINARY RULES?
           </h2>
 
-          <p className="text-xl text-gray-300 mb-10">Your twisted recipe could be the next global sensation</p>
+          <p className="text-2xl md:text-3xl text-white mb-12 max-w-2xl mx-auto leading-relaxed">
+            Your twisted recipe could be the next{" "}
+            <span className="text-yellow-400 font-semibold">global sensation</span>
+          </p>
 
+          <div className="space-y-8">
           <Button
             size="lg"
-            id="cta-submit"
-            className="bg-gradient-to-r from-green-500 to-pink-600 hover:from-green-600 hover:to-pink-700 text-white font-black px-12 py-6 text-xl rounded-full transform hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-green-500/25"
+              id="cta-submit"
+              className="text-lg px-10 py-6 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
           >
-            <Upload className="mr-3 h-6 w-6" />
-            Submit Your Sickest Twist Now
+              <Upload className="mr-2 h-5 w-5" />
+              Submit Your Twist
           </Button>
 
-          <p className="text-sm text-gray-500 mt-6">Join thousands of food rebels breaking culinary rules worldwide</p>
+            <p className="text-lg text-gray-500 dark:text-gray-400">
+              Join thousands of food rebels breaking culinary rules worldwide
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-gray-800">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-500">© 2024 POSHA. Powered by chaos, community, and creativity.</p>
-        </div>
+      <footer className="py-8 px-4 text-center text-gray-500 dark:text-gray-400">
+        <p>© 2025 Sickest Twist. All rights reserved.</p>
       </footer>
     </div>
   )
